@@ -65,7 +65,7 @@ class Session(models.Model):
     attendees_count = fields.Integer(string="Attendees count", compute='_get_attendees_count', store=True)
     state = fields.Selection([
                     ('draft', "Draft"),
-                    ('confirmed', "Con firm ed"),
+                    ('confirmed', "Confirmed"),
                     ('done', "Done"),
                     ], default='draft')
 
