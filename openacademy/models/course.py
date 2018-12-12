@@ -127,7 +127,7 @@ class Session(models.Model):
             else:
                 # Add duration to start_date, but: Monday + 5 days = Saturday,
                 # so subtract one second to get on Friday instead
-                start = fields.Datetime.from_string(session.start_date)
+                start = fields.Date.from_string(session.start_date)
                 duration = timedelta(days=session.duration, seconds=-1)
                 session.end_date = start + duration
 
@@ -136,8 +136,8 @@ class Session(models.Model):
             if session.start_date and session.end_date:
                 # Compute the difference between dates, but: Friday - Monday = 4
                 # days, so add one day to get 5 days instead
-                start_date = fields.Datetime.from_string(session.start_date)
-                end_date = fields.Datetime.from_string(session.end_date)
+                start_date = fields.Date.from_string(session.start_date)
+                end_date = fields.Date.from_string(session.end_date)
                 session.duration = (end_date - start_date).days + 1
 
     @api.multi
