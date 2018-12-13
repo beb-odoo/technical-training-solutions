@@ -189,7 +189,8 @@ class Wizard(models.TransientModel):
     def default_get(self, fields):
 
         res = super(Wizard, self).default_get(fields)
-        res.update({'attendee_ids': [(6, 0, self._context.get('active_ids', []))] })
+#        res.update({'attendee_ids': [(6, 0, self._context.get('active_ids', []))] })
+        res['attendee_ids'] = self._context.get('active_ids', [])
         return res
 
     session_ids = fields.Many2many('openacademy.session', string="Sessions", required=True)
