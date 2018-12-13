@@ -74,7 +74,7 @@ class Session(models.Model):
     seats = fields.Integer(string="Number of seats")
     instructor_id = fields.Many2one('res.partner', string="Instructor") #No ondelete = set null
     course_id = fields.Many2one('openacademy.course', ondelete='cascade', string="Course", required=True)
-    attendee_ids = fields.Many2many('res.partner', string="Attendees", domain=[('is_company', '=', 'False')])
+    attendee_ids = fields.Many2many('res.partner', string="Attendees", domain=[('is_company', '=', False)])
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
     level = fields.Selection(related='course_id.level', readonly=True)
     responsible_id = fields.Many2one(related='course_id.responsible_id', readonly=True, store=True)
@@ -189,7 +189,8 @@ class Wizard(models.TransientModel):
     def default_get(self, fields):
 
         res = super(Wizard, self).default_get(fields)
-        res.update({'attendee_ids': [(6, 0, self._context.get('active_ids', []))] })
+#        res.update({'attendee_ids': [(6, 0, self._context.get('active_ids', []))] })
+        res.update({'attendee_ids': [self._context.get('active_ids', [])] })
         return res
 
     session_ids = fields.Many2many('openacademy.session', string="Sessions", required=True)
