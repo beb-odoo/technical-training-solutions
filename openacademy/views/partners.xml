@@ -58,7 +58,7 @@
                 <form string="Add Attendees">
                     <group>
                         <field name="session_ids"/>
-                        <field name="attendee_ids" invisible="1"/>
+                        <field name="attendee_ids"/>
                     </group>
                     <footer>
                         <button name="subscribe" type="object"
